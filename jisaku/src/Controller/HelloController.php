@@ -5,14 +5,23 @@ use App\Controller\AppController;
 
 class HelloController extends AppController
 {
+    public $paginate = [
+        'limit'=>2,
+        'sort' =>'id'
+    ];
+    
     public function initialize(){
         parent::initialize();
         $this->loadModel('People');
+        $this->loadComponent('Paginator');
     }
     public function index()
     {
-        $data = $this->People->find('all');
-        $this->set(compact('data', $data));
+        
+//        $data = $this->People->find()->where(['name like'=>'%a%']);
+//        $data = $this->People->find('all', $condtion);
+        $data = $this->paginate($this->People);
+        $this->set('data', $data);
     }
     
     public function add()

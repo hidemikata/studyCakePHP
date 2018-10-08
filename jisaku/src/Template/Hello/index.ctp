@@ -6,9 +6,15 @@
 <body>
 
 <table>
-    <tr><th>id</th><th>name</th></tr>
+    <tr><th>
+            <?=$this->Paginator->sort('id')?>
+        </th>
+        <th>
+            <?=$this->Paginator->sort('name')?>
+        </th>
+    </tr>
 
-<?php foreach($data as $obj): ?>
+<?php foreach($data->toArray() as $obj): ?>
     <?='<tr><td>'?>
     <a href="  <?= $this->Url->build(['controller'=>'Hello', 'action'=>'edit']);   ?>?id=<?=$obj['id']?>  "><?=$obj['id']?></a>
     <?='</td><td>'?>
@@ -25,7 +31,22 @@
     
 <?= $this->Form->end() ?>    
     
-    
+    <div class="paginator">
+        <ul class="pagination">
+            
+            <?=$this->Paginator->first('first')?>
+            <?=$this->Paginator->prev('perv')?>
+            <?=$this->Paginator->next('next')?>
+            <?=$this->Paginator->last('last')?>
+            
+            
+            
+        </ul>
+        
+        
+        
+    </div>
+   
     
     
     
